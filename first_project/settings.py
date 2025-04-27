@@ -24,12 +24,14 @@ SECRET_KEY = 'django-insecure-93)0wcakq+ej1fs3^^+cg94f85jgj&c)2#)&%q=36f3(n2f8p-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False   # damit Fehler 404 angezeigt werden kann
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  '127.0.0.1',      # notwendig, wenn DEBUG = False gesetzt ist
+]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

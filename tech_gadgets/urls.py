@@ -6,7 +6,8 @@ from .views import start_page_view, single_gadget_int_view, single_gadget_slug_v
 # Reihenfolge ist wichtig
 urlpatterns = [
     path('', start_page_view),
-    path('gadget/', single_gadget_view),
+    # path('gadget/', single_gadget_view),
+    path('gadget/', GadgetView.as_view()),
     # path('gadget/', single_gadget_post_view), # wird zusammengefasst mit GET und POST
     # path('gadget/<str:gadget_id>', single_gadget_view),   # Type darf kein String sein, außer er kann in int umgewandelt werden
     path('gadget/<int:gadget_id>', single_gadget_int_view),  # Type muss definiert werden, da sonst Error "list indices must be integers or slices, not str"

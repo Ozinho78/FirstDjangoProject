@@ -94,3 +94,12 @@ class GadgetView(View): # erbt von der Klasse View
         if gadget_match:
             return JsonResponse(gadget_match)
         raise Http404()
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+            print(f"received data: {data}")
+            return JsonResponse({"response": "Das war was."})
+        except:
+            return JsonResponse({"response": "Das war wohl nix."})
+        

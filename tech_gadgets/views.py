@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, Http40
 import json     # pythonspezifischer Import
 from django.utils.text import slugify   # aus jedem String wird ein Slug gemacht
 from django.urls import reverse # gibt die URL zurück, zu der wir redirecten wollen
+from django.views import View
 
 from .dummy_data import gadgets     # importiert die Variable gadgets aus der Datei dummy_data aus dem aktuellen Verzeichnis .
 
@@ -12,7 +13,7 @@ def start_page_view(request):
     return HttpResponse("Hey das hat doch gut funktioniert!")
 
 
-def single_gadget_view(request, gadget_id):
+def single_gadget_int_view(request, gadget_id):
     # return HttpResponse(json.dumps(gadgets[0]), content_type="application/json")   # wandelt die Daten in JSON-Format um
     # return JsonResponse(gadgets[0])   # Umwandlung in JSON von Django
     # return JsonResponse({"test:": True})  # gibt JSON aus
@@ -53,3 +54,43 @@ def single_gadget_post_view(request):
             return JsonResponse({"response": "Das war was."})
         except:
             return JsonResponse({"response": "Das war wohl nix."})
+        
+
+
+
+# GET und POST zusammengefasst in einer View
+def single_gadget_view(request, gadget_slug=""):
+
+    if request.method == "GET":
+        gadget_match = None
+        for gadget in gadgets:  # geht das JSON-Array durch
+            if slugify(gadget['name']) == gadget_slug:  # wenn der ge(slugify)te Name dem Wert in der URL entspricht
+                gadget_match = gadget   # dann wird das JSON der Variablen zugewiesen
+
+        if gadget_match:
+            return JsonResponse(gadget_match)
+        raise Http404()
+    
+
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            print(f"received data: {data}")
+            return JsonResponse({"response": "Das war was."})
+        except:
+            return JsonResponse({"response": "Das war wohl nix."})
+        
+
+
+
+class GadgetView(View): # erbt von der Klasse View
+    # vermeidet die Notwendigkeit einer IF-Abfrage, gadget_slug muss noch übergeben werden, self ist notwendig, weil es Funktion innerhalb einer Klasse ist
+    def get(self, request, gadget_slug):     
+        gadget_match = None
+        for gadget in gadgets:  # geht das JSON-Array durch
+            if slugify(gadget['name']) == gadget_slug:  # wenn der ge(slugify)te Name dem Wert in der URL entspricht
+                gadget_match = gadget   # dann wird das JSON der Variablen zugewiesen
+
+        if gadget_match:
+            return JsonResponse(gadget_match)
+        raise Http404()

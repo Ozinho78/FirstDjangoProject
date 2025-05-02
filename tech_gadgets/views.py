@@ -7,10 +7,25 @@ from django.views import View
 
 from .dummy_data import gadgets     # importiert die Variable gadgets aus der Datei dummy_data aus dem aktuellen Verzeichnis .
 
+from django.views.generic.base import RedirectView
+
 
 # Create your views here.
 def start_page_view(request):
     return HttpResponse("Hey das hat doch gut funktioniert!")
+
+
+class RedirectToGadgetView(RedirectView):
+    pattern_name = "gadget_slug_url"
+
+    def get_redirect_url(self, *args, **kwargs):
+        print("Hello")
+        slug = slugify(gadgets[kwargs.get("gadget_id",0)]["name"])   # gadget_id muss aus den kwargs gezogen werden
+        # new_kwargs = {"gadget_slug": "ultraportable-laptop-z"}  # kwargs = key word arguments
+        new_kwargs = {"gadget_slug": slug}
+        return super().get_redirect_url(*args, **new_kwargs)
+
+
 
 
 def single_gadget_int_view(request, gadget_id):

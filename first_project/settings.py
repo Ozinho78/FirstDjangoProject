@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-93)0wcakq+ej1fs3^^+cg94f85jgj&c)2#)&%q=36f3(n2f8p-
 DEBUG = True
 # DEBUG = False   # damit Fehler 404 angezeigt werden kann
 
-ALLOWED_HOSTS = [
-  '127.0.0.1',      # notwendig, wenn DEBUG = False gesetzt ist
-]
+
+# notwendig, wenn DEBUG = False gesetzt ist
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tech_gadgets'
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,9 @@ ROOT_URLCONF = 'first_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'first_project/templates',
+                 BASE_DIR / 'tech_gadgets/templates'
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +130,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

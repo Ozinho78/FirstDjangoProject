@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>🚀 Django Testseite</title>
+    <link rel="stylesheet" href="{% static 'tech_gadgets/style.css' %}">
+</head>
+<body>
+  Das ist ein Test
+  {% for gadget in gadget_list %}
+    <h2>
+      {% comment %} upper schreibt alles fett {% endcomment %}
+      {% comment %} {{ gadget.name|upper}} {% endcomment %}
+      {{ gadget.name }}
+    </h2>
+  {% endfor %}
+</body>
+</html>

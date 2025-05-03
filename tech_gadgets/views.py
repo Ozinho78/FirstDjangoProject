@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, Http404
 import json     # pythonspezifischer Import
 from django.utils.text import slugify   # aus jedem String wird ein Slug gemacht
@@ -12,7 +12,11 @@ from django.views.generic.base import RedirectView
 
 # Create your views here.
 def start_page_view(request):
-    return HttpResponse("Hey das hat doch gut funktioniert!")
+    # return HttpResponse("Hey das hat doch gut funktioniert!")
+    # return render(request, 'tech_gadgets/test_static.html')
+
+    # Key wird an HTML-Template übergeben für For-Loop, Value ist die Variable
+    return render(request, 'tech_gadgets/test.html', {'gadget_list': gadgets})
 
 
 class RedirectToGadgetView(RedirectView):
@@ -20,7 +24,7 @@ class RedirectToGadgetView(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         print("Hello")
-        slug = slugify(gadgets[kwargs.get("gadget_id",0)]["name"])   # gadget_id muss aus den kwargs gezogen werden
+        slug = slugify(gadgets[kwargs.get("gadget_id",3)]["name"])   # gadget_id muss aus den kwargs gezogen werden, Standard-ID=3
         # new_kwargs = {"gadget_slug": "ultraportable-laptop-z"}  # kwargs = key word arguments
         new_kwargs = {"gadget_slug": slug}
         return super().get_redirect_url(*args, **new_kwargs)

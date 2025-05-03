@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Seite nicht gefunden – 404</title>
+    <style>
+        body {
+            background-color: #fdf6e3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: #657b83;
+        }
+
+        h1 {
+            font-size: 10em;
+            margin: 0;
+            color: #dc322f;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        .ghost {
+            width: 150px;
+            margin: 40px auto;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        a {
+            color: #268bd2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>404</h1>
+    <h2>Ups! Diese Seite ist verschwunden.</h2>
+    <img src="{% static 'img/ghost.png' %}" alt="Ghost Icon" class="ghost" />
+    {% comment %} <img src="https://img.icons8.com/ios-filled/250/000000/ghost.png" alt="Ghost Icon" class="ghost" /> {% endcomment %}
+    <p>Vielleicht wurde sie entführt, gelöscht oder hat sich in Luft aufgelöst. 🤷‍♂️</p>
+    <p><a href="{% url 'home' %}">Zurück zur Startseite</a></p>
+</body>
+</html>

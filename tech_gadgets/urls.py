@@ -6,7 +6,8 @@ from .views import start_page_view, single_gadget_int_view, single_gadget_slug_v
 # Reihenfolge ist wichtig
 urlpatterns = [
     # path('', start_page_view),
-    path('', RedirectToGadgetView.as_view()),
+    path('start/', start_page_view),
+    path('', RedirectToGadgetView.as_view(), name="home"),
     path('<int:gadget_id>', RedirectToGadgetView.as_view()),    # vorher slugify und dann Weiterleitung zur URL
     # path('gadget/', single_gadget_view),
     path('gadget/', GadgetView.as_view()),
@@ -17,3 +18,4 @@ urlpatterns = [
     # path('gadget/send_gadget/', single_gadget_post_view)  # testet das Senden von Daten in der Konsole
     path('gadget/<slug:gadget_slug>', GadgetView.as_view(), name="gadget_slug_url")
 ]
+

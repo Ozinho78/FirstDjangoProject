@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>🚀 Django Testseite</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        img {
+            width: 200px;
+            margin-top: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .ok {
+            margin-top: 40px;
+            color: green;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚧 Testseite für Django Static</h1>
+    <p>Wenn du dieses Bild siehst, funktioniert dein <strong>static</strong>-Setup:</p>
+    <img src="{% static 'tech_gadgets/img/ghost.png' %}" alt="Ghost Icon" />
+    <div class="ok">👍 Alles funktioniert!</div>
+</body>
+</html>
